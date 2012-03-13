@@ -1,6 +1,7 @@
 <?php
 require_once 'simpletest/simpletest.php';
 require_once 'simpletest/web_tester.php';
+require_once 'show_passes.php';
 
 class CustomTestSuite extends TestSuite
 {
