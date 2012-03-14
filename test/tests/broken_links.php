@@ -1,9 +1,9 @@
 <?php
 require_once 'simpletest/browser.php';
 
-class LinksOnPageTestCase extends CustomWebTestCase 
+class BrokenLinksTestCase extends CustomWebTestCase 
 {
-  public function testLinksOnPage()
+  public function testBrokenLinksOnPage()
   {
     $browser = new SimpleBrowser();
     $browser->get($this->base);

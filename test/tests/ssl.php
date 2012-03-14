@@ -1,6 +1,6 @@
 <?php
 
-class TestSsl extends CustomWebTestCase 
+class SslWebTestCase extends CustomWebTestCase 
 {
   private function _testSwitchToSsl($page) {
     $this->setMaximumRedirects(0);
@@ -14,6 +14,13 @@ class TestSsl extends CustomWebTestCase
   {
     if (strlen($this->base)) {
       $this->_testSwitchToSsl($this->base .'/user');
+    }
+  }
+
+  public function testSwitchToSslAdmin()
+  {
+    if (strlen($this->base)) {
+      $this->_testSwitchToSsl($this->base .'/admin');
     }
   }
 }
