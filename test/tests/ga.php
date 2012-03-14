@@ -1,33 +1,32 @@
 <?php
 
-class TestGa extends WebTestCase 
+class GaWebTestCase extends CustomWebTestCase 
 {
-  public $pages = array();
-  public $base;
-
-  public function setBase($base)
+  private function _testGaIsOnPage($page) 
   {
-    $this->base = $base;
-  }  
+    $this->get($page);
+    $content = $this->getBrowser()->getContent();
 
-  public function addPage($page)
-  {
-    $this->pages[] = $page;
+    $this->assertTrue(preg_match('/google-analytics.com\/ga.js/', $content), 'Regex /google-analytics.com\/ga.js/ on '. $page);
+    $this->assertTrue(preg_match('/UA-[0-9]{1,10}-[0-9]{1}/', $content), 'Regex /UA-[0-9]{1,10}-[0-9]{1}/ on '. $page);
   }
 
-  public function testGaHomepage() 
+  public function testGaIsOnHomepage() 
   {
-    foreach ($this->pages as $page) {
+    $this->_testGaIsOnPage($this->base);
+  }
 
-      if (strlen($this->base)) {
-        $page = $this->base . $page;
-      }  
+  public function testGaIsOnPages() 
+  {
+    if (is_array($this->pages) && !empty($this->pages)) {
+      foreach ($this->pages as $page) {
 
-      $this->get($page);
-      $content = $this->getBrowser()->getContent();
-
-      $this->assertTrue(preg_match('/google-analytics.com\/ga.js/', $content), 'Regex /google-analytics.com\/ga.js/ on '. $page);
-      $this->assertTrue(preg_match('/UA-[0-9]{1,10}-[0-9]{1}/', $content), 'Regex /UA-[0-9]{1,10}-[0-9]{1}/ on '. $page);
+        if (strlen($this->base)) {
+          $page = $this->base . $page;
+        }  
+        
+        $this->_testGaIsOnPage($page);
+      }
     }
   }
 }

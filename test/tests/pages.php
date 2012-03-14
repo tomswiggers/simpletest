@@ -1,25 +1,24 @@
 <?php
 
-class TestPages extends WebTestCase 
+class PagesExistsWebTestCase extends CustomWebTestCase 
 {
-  public $pages = array();
-  public $base;
-
-  public function setBase($base)
+  private function _testPageExists($page) 
   {
-    $this->base = $base;
-  }  
-
-  public function addPage($page)
-  {
-    $this->pages[] = $page;
+    $this->assertTrue($this->get($page), $page);
   }
 
-  function testPagesExists() 
+  public function testHomePageExists()
   {
-    foreach ($this->pages as $page) {
-      $page = $this->base . $page;
-      $this->assertTrue($this->get($page), $page);
+    $this->_testPageExists($this->base);
+  }
+
+  public function testPagesExists() 
+  {
+    if (is_array($this->pages) && !empty($this->pages)) {
+      
+      foreach ($this->pages as $page) {
+        $this->_testPageExists($this->base . $page);
+      }
     }
   }
 }

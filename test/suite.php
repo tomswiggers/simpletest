@@ -6,6 +6,8 @@ require_once 'custom_web_test_case.php';
 
 require_once 'tests/access_denied.php';
 require_once 'tests/ssl.php';
+require_once 'tests/pages.php';
+require_once 'tests/ga.php';
 
 class CustomTestSuite extends TestSuite
 {
@@ -22,20 +24,6 @@ class CustomTestSuite extends TestSuite
   public function addPage($page)
   {
     $this->pages[] = $page;
-  }
-
-  public function createTestPages()
-  {
-    require_once 'tests/pages.php';
-
-    $this->testPages = new TestPages();
-  }
-
-  public function createTestGa()
-  {
-    require_once 'tests/ga.php';
-
-    $this->testGa = new TestGa();
   }
 
   public function createTestLinksOnPage()
