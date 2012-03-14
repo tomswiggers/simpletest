@@ -18,7 +18,7 @@ class ShowPassesHtml extends HtmlReporter {
   }
 }
 
-class ShowPassesText extends TextReporter 
+class ShowPassesText extends SimpleReporter 
 {
   public $red = "\033[31;40m\033[1m%s\033[0m";
   public $green = "\033[1;32;40m\033[1m%s\033[0m";
@@ -31,7 +31,18 @@ class ShowPassesText extends TextReporter
     array_shift($breadcrumb);
     
     echo ' '. implode('->', $breadcrumb);
-    echo '->'. $message .PHP_EOL;
+    echo ' '. $message .PHP_EOL;
+  }
+
+  function paintFail($message) 
+  {
+    parent::paintFail($message);
+    printf($this->red, 'Fail');
+    $breadcrumb = $this->getTestList();
+    array_shift($breadcrumb);
+    
+    echo ' '. implode('->', $breadcrumb);
+    echo ' '. $message .PHP_EOL;
   }
   
   function paintFooter($test_name) 

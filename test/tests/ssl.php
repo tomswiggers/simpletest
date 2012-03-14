@@ -6,8 +6,8 @@ class TestSsl extends CustomWebTestCase
     $this->setMaximumRedirects(0);
     $this->get($page);
     $headers = $this->getBrowser()->getHeaders();
-    $this->assertResponse(302);
-    $this->assertTrue(preg_match('/Location: https:/', $headers));
+    $this->assertResponse(302, 'Check response code is 302 on '. $page);
+    $this->assertTrue(preg_match('/Location: https:/', $headers), 'Regex /Location: https:/ on response headers on '. $page);
   }
 
   public function testSwitchToSslUser()

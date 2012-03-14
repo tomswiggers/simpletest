@@ -35,6 +35,13 @@ class CustomTestSuite extends TestSuite
     $this->testSsl = new TestSsl();
     $this->testSsl->setBase($this->base);
   }
+  public function createTestLinksOnPage()
+  {
+    require_once 'tests/links_on_page.php';
+    $this->testLinksOnPage = new LinksOnPageTestCase();
+    $this->testLinksOnPage->setBase($this->base);
+  }
+
 
   public function run()
   {
