@@ -15,7 +15,7 @@ class TestGa extends WebTestCase
     $this->pages[] = $page;
   }
 
-  public function testHomepage() 
+  public function testGaHomepage() 
   {
     foreach ($this->pages as $page) {
 
@@ -26,11 +26,8 @@ class TestGa extends WebTestCase
       $this->get($page);
       $content = $this->getBrowser()->getContent();
 
-      $result = ($this->assertTrue(preg_match('/google-analytics.com\/ga.js/', $content))) ? 'OK' : 'NOK';
-      echo 'check for ga.js in source code on: ' .$page. ' ' . $result . PHP_EOL;
-
-      $result = ($this->assertTrue(preg_match('/UA-[0-9]{1,10}-[0-9]{1}/', $content))) ? 'OK' : 'NOT OK';
-      echo 'Check for GA tracking code on: ' .$page. ' ' .$result. PHP_EOL;
+      $this->assertTrue(preg_match('/google-analytics.com\/ga.js/', $content), 'Regex /google-analytics.com\/ga.js/ on '. $page);
+      $this->assertTrue(preg_match('/UA-[0-9]{1,10}-[0-9]{1}/', $content), 'Regex /UA-[0-9]{1,10}-[0-9]{1}/ on '. $page);
     }
   }
 }

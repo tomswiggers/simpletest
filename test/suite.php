@@ -2,6 +2,7 @@
 require_once 'simpletest/simpletest.php';
 require_once 'simpletest/web_tester.php';
 require_once 'show_passes.php';
+require_once 'custom_web_test_case.php';
 
 class CustomTestSuite extends TestSuite
 {
@@ -25,6 +26,14 @@ class CustomTestSuite extends TestSuite
     require_once 'tests/ga.php';
 
     $this->testGa = new TestGa();
+  }
+
+  public function createTestSsl()
+  {
+    require_once 'tests/ssl.php';
+
+    $this->testSsl = new TestSsl();
+    $this->testSsl->setBase($this->base);
   }
 
   public function run()
