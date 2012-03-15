@@ -1,1 +1,12 @@
-Simpletest scripts
+Simpletest scripts for websites
+
+create ini file
+name = Tests Example
+base = http://www.example.com
+testCases[] = AccessDeniedWebTestCase
+testCases[] = SslWebTestCase
+testCases[] = PagesExistsWebTestCase
+testCases[] = GaWebTestCase
+
+Execute php:
+php run.php -f example.ini

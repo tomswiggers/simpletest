@@ -8,6 +8,7 @@ require_once 'tests/access_denied.php';
 require_once 'tests/ssl.php';
 require_once 'tests/pages.php';
 require_once 'tests/ga.php';
+require_once 'tests/broken_links.php';
 
 class CustomTestSuite extends TestSuite
 {

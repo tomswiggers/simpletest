@@ -1,7 +1,7 @@
 <?php
 require_once 'simpletest/browser.php';
 
-class BrokenLinksTestCase extends CustomWebTestCase 
+class BrokenLinksWebTestCase extends CustomWebTestCase 
 {
   public function testBrokenLinksOnPage()
   {
