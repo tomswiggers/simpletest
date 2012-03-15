@@ -13,7 +13,9 @@ class GaWebTestCase extends CustomWebTestCase
 
   public function testGaIsOnHomepage() 
   {
-    $this->_testGaIsOnPage($this->base);
+    if (strlen($this->base)) {
+      $this->_testGaIsOnPage($this->base);
+    }
   }
 
   public function testGaIsOnPages() 

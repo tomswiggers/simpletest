@@ -26,17 +26,29 @@ class CustomTestSuite extends TestSuite
     $this->pages[] = $page;
   }
 
-  public function createTestLinksOnPage()
+  private function _checkForPages($objName)
   {
-    require_once 'tests/links_on_page.php';
-    $this->testLinksOnPage = new LinksOnPageTestCase();
-    $this->testLinksOnPage->setBase($this->base);
+    if (array_key_exists($objName, $this->config)) {
+
+      if (array_key_exists('pages', $this->config[$objName]) && !empty($this->config[$objName]['pages'])) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
   }
 
   private function _addTestCase($objName)
   {
     $obj = new $objName();
     $obj->setBase($this->config['base']);
+
+    if ($this->_checkForPages($objName)) {
+      
+      foreach ($this->config[$objName]['pages'] as $page) {
+        $obj->addPage($page);
+      }
+    }
 
     $this->add($obj);
   }
