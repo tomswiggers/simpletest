@@ -14,4 +14,11 @@ class CustomWebTestCase extends WebTestCase
   {
     $this->pages[] = $page;
   }
+
+  public function getPages()
+  {
+    if ($this->properties->defaultPages) {
+      return $this->config->pages;
+    }
+  }
 }

@@ -9,6 +9,7 @@ require_once 'tests/ssl.php';
 require_once 'tests/pages.php';
 require_once 'tests/ga.php';
 require_once 'tests/broken_links.php';
+require_once 'tests/page_content.php';
 
 class CustomTestSuite extends TestSuite
 {
@@ -19,7 +20,7 @@ class CustomTestSuite extends TestSuite
   public function __construct($config)
   {
     $this->config = $config;
-    parent::__construct($config['name']);
+    parent::__construct($config->name);
   }
 
   public function addPage($page)
@@ -39,24 +40,27 @@ class CustomTestSuite extends TestSuite
     return FALSE;
   }
 
-  private function _addTestCase($objName)
+  private function _addTestCase($testCase)
   {
-    $obj = new $objName();
-    $obj->setBase($this->config['base']);
+    $obj = new $testCase->name();
+    $obj->setBase($this->config->base);
+    $obj->config = $this->config;
+    $obj->properties = $testCase;
 
+/*
     if ($this->_checkForPages($objName)) {
       
-      foreach ($this->config[$objName]['pages'] as $page) {
-        $obj->addPage($page);
+      foreach ($this->config->$objName->pages as $page) {
+        $obj->addPage($page['url']);
       }
     }
-
+ */
     $this->add($obj);
   }
 
   private function _addTestCases()
   {
-    foreach ($this->config['testCases'] as $testCase) {
+    foreach ($this->config->testCases as $testCase) {
       $this->_addTestCase($testCase);
     }
   }
