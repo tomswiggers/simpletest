@@ -27,10 +27,11 @@ class ShowPassesText extends SimpleReporter
   {
     parent::paintPass($message);
     printf($this->green, 'Pass');
+
     $breadcrumb = $this->getTestList();
     array_shift($breadcrumb);
     
-    echo ' '. implode('->', $breadcrumb);
+    //echo ' '. implode('->', $breadcrumb);
     echo ' '. $message .PHP_EOL;
   }
 
@@ -41,7 +42,7 @@ class ShowPassesText extends SimpleReporter
     $breadcrumb = $this->getTestList();
     array_shift($breadcrumb);
     
-    echo ' '. implode('->', $breadcrumb);
+    //echo ' '. implode('->', $breadcrumb);
     echo ' '. $message .PHP_EOL;
   }
   

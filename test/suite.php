@@ -10,6 +10,7 @@ require_once 'tests/pages.php';
 require_once 'tests/ga.php';
 require_once 'tests/broken_links.php';
 require_once 'tests/page_content.php';
+require_once 'tests/WCAG.php';
 
 class CustomTestSuite extends TestSuite
 {

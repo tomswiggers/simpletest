@@ -1,5 +1,6 @@
 <?php
 require_once 'simpletest/browser.php';
+require_once 'custom_php_parser.php';
 
 class BrokenLinksWebTestCase extends CustomWebTestCase 
 {
@@ -8,6 +9,8 @@ class BrokenLinksWebTestCase extends CustomWebTestCase
   {
     $browser = new SimpleBrowser();
     $browser->get($url);
+
+    return;
 
     $urls = $browser->getUrls();
 
@@ -23,12 +26,16 @@ class BrokenLinksWebTestCase extends CustomWebTestCase
   public function testBrokenLinksOnHomepage()
   {
     if (strlen($this->base)) {
-      //$this->_testBrokenLinks($this->base);
+      $this->_testBrokenLinks($this->base);
     }
   }
 
   public function testBrokenLinksOnPages()
   {
-    var_dump($this->config);
+    $browser = new SimpleBrowser();
+    Simpletest::setParsers(array(new CustomSimplePhpPageBuilder()));
+    $browser->get('http://www.compeed.no');
+
+    //var_dump($this->config);
   }
 }
